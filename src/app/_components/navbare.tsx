@@ -80,8 +80,8 @@ export default function Navbar() {
           ) : (
             <>
               <div className="hidden md:flex items-center space-x-3">
-                <Link href="/login" className={getNavLinkClass('/login')}>Login</Link>
-                <Link href="/rejestr" className={getNavLinkClass('/')}>Register</Link>
+                <Link href="/login" className={getNavLinkClass('/')}>Login</Link>
+                <Link href="/rejestr" className={getNavLinkClass('/rejestr')}>Register</Link>
               </div>
             </>
           )}
