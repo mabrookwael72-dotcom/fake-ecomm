@@ -79,7 +79,7 @@ let {setToken}=useContext(UserContext)
                   <input type="password" name="rePassword" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.rePassword} placeholder="••••••••" className="bg-gray-50 border text-sm rounded-lg block w-full p-2.5"/>
                   {formik.errors.rePassword && formik.touched.rePassword && <p className="text-red-500 text-xs mt-1">{formik.errors.rePassword}</p>}
                 </div>
-             <button type="submit" disabled={!(formik.isValid && formik.dirty)} className={`w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center ${!(formik.isValid && formik.dirty) ? 'bg-gray-800' : 'bg-gray-800 hover:bg-gray-800'}`}>
+             <button type="submit" disabled={!(formik.isValid && formik.dirty)} className={`w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center ${!(formik.isValid && formik.dirty) ? 'bg-gray-800 hover:bg-blue-700 cursor-pointer'  : 'bg-gray-800 hover:bg-blue-700'}`}>
                   Create an account
                 </button>
                 

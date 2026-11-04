@@ -65,7 +65,7 @@ export default function ProductDetails() {
             <p className="flex items-center gap-1">⭐ {product.ratingsAverage}</p>
           </div>
 
-          <button onClick={()=>addCart(product.id)} className="w-full mt-6 bg-slate-900 dark:bg-blue-600 text-white p-3 rounded-lg hover:bg-slate-800 dark:hover:bg-blue-700 transition">
+          <button onClick={()=>addCart(product.id)} className="cursor-pointer w-full mt-6 bg-slate-900 dark:bg-blue-600 text-white p-3 rounded-lg hover:bg-slate-800 dark:hover:bg-blue-700 transition">
             add to cart
           </button>
         </div>

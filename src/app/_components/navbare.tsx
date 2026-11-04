@@ -74,14 +74,14 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="hidden md:flex items-center">
-                <button onClick={handleLogout} className="px-4 py-2 text-sm font-medium text-white bg-gray-700 hover:bg-black rounded-lg">Logout</button>
+                <button onClick={handleLogout} className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-gray-700 hover:bg-black rounded-lg">Logout</button>
               </div>
             </>
           ) : (
             <>
               <div className="hidden md:flex items-center space-x-3">
                 <Link href="/login" className={getNavLinkClass('/login')}>Login</Link>
-                <Link href="/" className={getNavLinkClass('/')}>Register</Link>
+                <Link href="/rejestr" className={getNavLinkClass('/')}>Register</Link>
               </div>
             </>
           )}
@@ -120,7 +120,7 @@ export default function Navbar() {
             </>) : (<>
               <>
                 <Link href="/login" onClick={() => setIsOpen(false)} className="block w-full text-center px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 rounded-lg">Login</Link>
-                <Link href="/" onClick={() => setIsOpen(false)} className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg">Register</Link>
+                <Link href="/rejestr" onClick={() => setIsOpen(false)} className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg">Register</Link>
               </>
            </> )}
           </div>

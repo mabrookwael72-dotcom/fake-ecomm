@@ -97,13 +97,13 @@ let router=useRouter()
                 {/* زر تسجيل الدخول */}
                 <button 
                   type="submit" 
-                  className="w-full text-white bg-gray-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
+                  className="cursor-pointer w-full text-white bg-gray-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
                 >
                   Sign in
                 </button>
                 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet? <Link href="/rejestr" className="font-medium text-primary-600 text-blue-600 hover:underline dark:text-primary-500">Sign up</Link>
+                  Don’t have an account yet? <Link href="/rejestr" className=" font-medium text-primary-600 text-blue-600 hover:underline cursor-pointer dark:text-primary-500">Sign up</Link>
                 </p>
               </form>
             </div>
