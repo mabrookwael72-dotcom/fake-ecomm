@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { CartContext } from "../../context/CartContext"
+import Link from "next/link"
 
 export default function Cart() {
   const router = useRouter()
@@ -107,6 +108,10 @@ export default function Cart() {
         </table>
         <h3 className="p-3"> total Price : {UserLogged?.totalCartPrice}</h3>
       </div>
+      <Link href="/cart/checkout">
+                <button  className="rounded-2xl w-full cursor-pointer bg-gray-800 hover:bg-black text-white p-2 mt-2">ChekOut</button>
+
+      </Link>
     </>
   )
 }

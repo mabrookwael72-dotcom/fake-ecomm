@@ -38,7 +38,7 @@ export default function Navbar() {
     }`;
   }
 
-  function getMobileNavLinkClass(path: string) {
+  function getMobileNavLinkClass(path) {
     const isActive = pathname === path
     return `block px-3 py-2 rounded-lg text-base font-medium transition ${
       isActive
