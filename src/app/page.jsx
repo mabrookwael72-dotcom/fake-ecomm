@@ -1,10 +1,10 @@
-import Login from "./login/page"
+import RecantHome from "./home/page"
 
 
 
  export default function Main() {
 return(<>  
-<Login/>
+<RecantHome/>
 
 </>   )
  }
