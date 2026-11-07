@@ -11,7 +11,7 @@ import { CartContext } from "../../context/CartContext";
 export default function RecantHome() {
   const router = useRouter()
   const [isChecking, setIsChecking] = useState(true)
-  let { addProductCart } = useContext(CartContext)
+  const { addProductCart } = useContext(CartContext)
 
   // الحماية: لو مش مسجل دخول، ارجع للوجن
   useEffect(() => {
@@ -25,14 +25,13 @@ export default function RecantHome() {
 
   async function addProduct(productId) {
     try {
-      let respons = await addProductCart(productId)
-      console.log(respons);
-      if (respons.data.status === 'success') {
-        toast(respons.data.message)
+      const res = await addProductCart(productId)
+      if (res.data.status === 'success') {
+        toast('تم الاضافة بنجاح')
       }
     } catch (error) {
       console.log(error)
-      toast.error('Please login first')
+      toast('Please login first')
     }
   }
 
@@ -40,15 +39,13 @@ export default function RecantHome() {
     return await axios.get('https://ecommerce.routemisr.com/api/v1/products')
   }
 
-  let { isPending, error, data } = useQuery({
+  const {  data } = useQuery({
     queryKey: ['repoData'],
     queryFn: getProduct
   })
 
   // طول ما بنتأكد من التوكن، متعرضش حاجة
   if (isChecking) return <h1 className="text-center mt-20">Loading...</h1>
-  if (isPending) return <h1 className="text-center mt-20">Loading products...</h1>
-  if (error) return <h1 className="text-center mt-20">Something went wrong</h1>
 
   return (
     <div className="grid grid-cols-2 bg-gray-200 md:grid-cols-4 gap-4 p-4">

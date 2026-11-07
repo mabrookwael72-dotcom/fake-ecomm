@@ -2,7 +2,6 @@
 import { useFormik } from 'formik';
 import axios from 'axios';
 
-import Link from 'next/link';
 import toast from 'react-hot-toast';
 
 export default function ChekOut() {
@@ -12,7 +11,7 @@ export default function ChekOut() {
     }
   // دالة الإرسال لطلب تسجيل الدخول (Signin)
   }
-  let Formik = useFormik({
+  let formik = useFormik({
     initialValues: {
       details: '', 
       phone: '',
@@ -23,12 +22,11 @@ export default function ChekOut() {
   async function handleChekout() {
   try {
     // 1. هات الكارت بتاع اليوزر الأول عشان تجيب الـ ID الصح
-    let { data: cartData } = await axios.get(
-      `https://ecommerce.routemisr.com/api/v1/cart`,
+    let { data: cartdata } = await axios.get(`https://ecommerce.routemisr.com/api/v1/cart`,
       { headers: getHeaders() }
     );
 
-    let cartId = cartData.data._id;
+    let cartId = cartdata.data._id;
 
     if (!cartId) {
       toast.error('الكارت فاضي');
@@ -36,9 +34,8 @@ export default function ChekOut() {
     }
 
     // 2. ابعت طلب الـ checkout-session بالـ ID الصح
-    let { data } = await axios.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${window.location.origin}`,
-      { shippingAddress: Formik.values },
+    let { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${window.location.origin}`,
+      { shippingAddress: formik.values },
       { headers: getHeaders() }
     );
 
@@ -65,7 +62,7 @@ export default function ChekOut() {
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               
               
-              <form onSubmit={Formik.handleSubmit} className="space-y-4 md:space-y-6">
+              <form onSubmit={formik.handleSubmit} className="space-y-4 md:space-y-6">
                 
                 {/* البريد الإلكتروني */}
                 <div>
@@ -73,16 +70,16 @@ export default function ChekOut() {
                   <input 
                     type="text"
                     name="details"
-                    onChange={Formik.handleChange}
-                    onBlur={Formik.handleBlur}
-                    value={Formik.values.details} 
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.details} 
                     id="details" 
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                     placeholder="Details" 
                     required
                   />
-                  {Formik.errors.details && Formik.touched.details && (
-                    <p className="text-red-500 text-xs mt-1">{Formik.errors.details}</p>
+                  {formik.errors.details && formik.touched.details && (
+                    <p className="text-red-500 text-xs mt-1">{formik.errors.details}</p>
                   )}
                 </div>
 
@@ -92,16 +89,16 @@ export default function ChekOut() {
                   <input 
                     type="tel" 
                     name="phone"
-                    onChange={Formik.handleChange}
-                    onBlur={Formik.handleBlur}
-                    value={Formik.values.phone} 
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone} 
                     id="phone" 
                     placeholder="01159998598" 
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                     required
                   />
-                  {Formik.errors.phone && Formik.touched.phone && (
-                    <p className="text-red-500 text-xs mt-1">{Formik.errors.phone}</p>
+                  {formik.errors.phone && formik.touched.phone && (
+                    <p className="text-red-500 text-xs mt-1">{formik.errors.phone}</p>
                   )}
                 </div>
 
@@ -110,16 +107,16 @@ export default function ChekOut() {
                   <input 
                     type="text" 
                     name="city"
-                    onChange={Formik.handleChange}
-                    onBlur={Formik.handleBlur}
-                    value={Formik.values.city} 
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.city} 
                     id="city" 
                     placeholder="city" 
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                     required
                   />
-                  {Formik.errors.city && Formik.touched.city && (
-                    <p className="text-red-500 text-xs mt-1">{Formik.errors.city}</p>
+                  {formik.errors.city && formik.touched.city && (
+                    <p className="text-red-500 text-xs mt-1">{formik.errors.city}</p>
                   )}
                 </div>
                 {/* زر تسجيل الدخول */}

@@ -6,10 +6,11 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function Rejestr() {
   const router = useRouter();
-let {setToken}=useContext(UserContext)
+const {setToken}=useContext(UserContext)
   const validationSchema = Yup.object({
     name: Yup.string().min(3).max(30).required('الاسم مطلوب'),
     email: Yup.string().email().required('البريد مطلوب'),
@@ -20,21 +21,22 @@ let {setToken}=useContext(UserContext)
 
   async function handleRegister(values) {
     try {
-      // اللينك الصح لمشروع Linked Posts
-      let { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values);
-      console.log(data);
-            localStorage.setItem('userToken',data.token)
+      
+      const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values);
       setToken(data.token)
       if(data.message==='success'){
+      localStorage.setItem('userToken',data.token)
+
       router.push('/home');}
-      // لو نجح روح للوجن مش الهوم
       
       
-    } catch (error) {
-      console.error(error);
-      alert(error.response?.data?.error || 'حدث خطأ ما، اتأكد من النت');
-    }
+      
+    }  catch (error) {
+  
+   toast('خطاء في انشاء الحساب')
   }
+}
+  
 
   const formik = useFormik({
     initialValues: {

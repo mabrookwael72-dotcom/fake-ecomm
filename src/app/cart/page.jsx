@@ -8,23 +8,23 @@ export default function Cart() {
   const router = useRouter()
   const [isChecking, setIsChecking] = useState(true)
   let { getLoggedCart, UpdateCartProduct, deletProductCart } = useContext(CartContext)
+  const [UserLogged, setLogged] = useState(null)
 
   async function deletCart(productId) {
-    let respons = await deletProductCart(productId)
-    setLogged(respons.data.data)
+    let res = await deletProductCart(productId)
+    setLogged(res.data.data)
   }
 
   async function updatCart(productId, count) {
-    // لو العدد بقى 0 امسح المنتج على طول
+    
     if (count === 0) {
       deletCart(productId)
-      return
+      
     }
-    let respons = await UpdateCartProduct(productId, count)
-    setLogged(respons.data.data)
+    let res = await UpdateCartProduct(productId, count)
+    setLogged(res.data.data)
   }
 
-  const [UserLogged, setLogged] = useState(null)
   async function getItem() {
     try {
       let respons = await getLoggedCart()
@@ -47,7 +47,7 @@ export default function Cart() {
   if (isChecking) return <h1 className="text-center mt-20">Loading...</h1>
 
   // لو الكارت فاضي
-  if (!UserLogged || UserLogged.products.length === 0) {
+  if (!UserLogged) {
     return <h1 className="text-center mt-20 text-xl">Your cart is empty 🛒</h1>
   }
 
@@ -108,10 +108,11 @@ export default function Cart() {
         </table>
         <h3 className="p-3"> total Price : {UserLogged?.totalCartPrice}</h3>
       </div>
+     {UserLogged?.products?.length>0 &&(
       <Link href="/cart/checkout">
                 <button  className="rounded-2xl w-full cursor-pointer bg-gray-800 hover:bg-black text-white p-2 mt-2">ChekOut</button>
 
-      </Link>
+      </Link>)}
     </>
   )
 }

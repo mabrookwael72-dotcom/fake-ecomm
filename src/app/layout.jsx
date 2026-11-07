@@ -2,15 +2,15 @@
 
 import Navbar from "./_components/navbare"
 import "./globals.css"
-import {QueryClient,QueryClientProvider,} from '@tanstack/react-query'
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
-import UserContextProvider from "@/context/UserContext"
+import UserContextProvider from "../context/UserContext"
 import { Toaster } from "react-hot-toast"
-import CartContextProvider from "@/context/CartContext"
+import CartContextProvider from "../context/CartContext"
 const queryClient = new QueryClient()
 
 
-export default function RootLayout({ children }: any) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>

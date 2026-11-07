@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useState, useEffect } from "react"
 
-export let UserContext = createContext()
+export const UserContext = createContext()
 
 export default function UserContextProvider({children}) {
   const [userToken, setToken] = useState(null)

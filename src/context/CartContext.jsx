@@ -1,15 +1,15 @@
 'use client'
 import axios from "axios"
-import { createContext, useState } from "react"
+import { createContext, useState} from "react"
 
-export let CartContext = createContext(null)
+export const CartContext = createContext()
 
-export default function CartContextProvider(props) {
+export default function CartContextProvider({children}) {
   const [numOfCartItems, setNumOfCartItems] = useState(0)
 
   function getHeaders() {
     return {
-      token: typeof window !== "undefined" ? localStorage.getItem('userToken') : null
+      token: localStorage.getItem('userToken') 
     }
   }
 
@@ -49,7 +49,7 @@ export default function CartContextProvider(props) {
 
   return (
     <CartContext.Provider value={{ numOfCartItems, setNumOfCartItems, deletProductCart, getLoggedCart, addProductCart, UpdateCartProduct }}>
-      {props.children}
+      {children}
     </CartContext.Provider>
   )
 }

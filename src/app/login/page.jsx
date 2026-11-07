@@ -7,30 +7,28 @@ import { UserContext } from '../../context/UserContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-
 export default function Login() {
-  let {userToken,setToken}=useContext(UserContext)
-let router=useRouter()
-  // دالة الإرسال لطلب تسجيل الدخول (Signin)
+  const {setToken}=useContext(UserContext)
+const router=useRouter()
   async function handleLogin(values) {
     try {
-      let { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values);
-      console.log('تم تسجيل الدخول بنجاح:', data);
-      toast('success')
-      localStorage.setItem('userToken',data.token)
+      const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values);
+      
       setToken(data.token)
       if(data.message==='success'){
-         
+        toast('تم تسجيل الدخول')
+               localStorage.setItem('userToken',data.token)
+
 
       router.push('/home');}
-      // يمكنك هنا حفظ الـ token في localStorage والتوجيه للرئيسية
-    } catch (error) {
-      console.error('خطأ في تسجيل الدخول:', error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة');
-    }
+   } catch (error) {
+  
+   toast('البريد الالكتروني أو كلمة المرور غير صحيحة') 
+ 
+}
   }
 
-  let Formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       email: '', 
       password: ''
@@ -54,47 +52,40 @@ let router=useRouter()
                 Sign in 
               </h1>
               
-              <form onSubmit={Formik.handleSubmit} className="space-y-4 md:space-y-6">
+              <form onSubmit={formik.handleSubmit} className="space-y-4 md:space-y-6">
                 
-                {/* البريد الإلكتروني */}
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                   <input 
                     type="email"
                     name="email"
-                    onChange={Formik.handleChange}
-                    onBlur={Formik.handleBlur}
-                    value={Formik.values.email} 
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email} 
                     id="email" 
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                     placeholder="name@company.com" 
                     required
                   />
-                  {Formik.errors.email && Formik.touched.email && (
-                    <p className="text-red-500 text-xs mt-1">{Formik.errors.email}</p>
-                  )}
+                  
                 </div>
 
-                {/* كلمة المرور */}
                 <div>
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                   <input 
                     type="password" 
                     name="password"
-                    onChange={Formik.handleChange}
-                    onBlur={Formik.handleBlur}
-                    value={Formik.values.password} 
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password} 
                     id="password" 
                     placeholder="••••••••" 
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                     required
                   />
-                  {Formik.errors.password && Formik.touched.password && (
-                    <p className="text-red-500 text-xs mt-1">{Formik.errors.password}</p>
-                  )}
+                 
                 </div>
 
-                {/* زر تسجيل الدخول */}
                 <button 
                   type="submit" 
                   className="cursor-pointer w-full text-white bg-gray-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
@@ -103,7 +94,7 @@ let router=useRouter()
                 </button>
                 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet? <Link href="/rejestr" className=" font-medium text-primary-600 text-blue-600 hover:underline cursor-pointer dark:text-primary-500">Sign up</Link>
+                  Don’t have an account yet? <Link href="/register" className=" font-medium text-primary-600 text-blue-600 hover:underline cursor-pointer dark:text-primary-500">Sign up</Link>
                 </p>
               </form>
             </div>

@@ -3,19 +3,15 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 export default function Allorders() {
-  const [UserLogged, setLogged] = useState<any[]>([])
+  const [UserLogged, setLogged] = useState([])
 
   async function getallorders() {
     let token = localStorage.getItem('userToken')
-    if (!token) return
-    let userId = JSON.parse(atob(token.split('.')[1])).id
 
-    let { data } = await axios.get(
-      `https://ecommerce.routemisr.com/api/v1/orders`,
+    let { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/orders`,
       { headers: { token } }
     )
     setLogged(data.data)
-    console.log(data.data)
   }
 
   useEffect(() => {
@@ -35,7 +31,7 @@ export default function Allorders() {
         </thead>
         <tbody>
           {UserLogged?.map((order) =>
-            order.cartItems?.map((item: any) => (
+            order.cartItems?.map((item) => (
               <tr key={item._id} className="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                 <td className="p-4">
                   <img src={item.product?.imageCover} className="w-16 md:w-24 max-w-full max-h-full" alt={item.product?.title} />
